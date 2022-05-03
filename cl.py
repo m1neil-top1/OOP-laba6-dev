@@ -31,7 +31,7 @@ class Client(Person):
     # Кабинет пользователя
     def personal_area(self):
         while True:
-            # TODO: Кошелёк
+            # TODO: Создать  Кошелёк + Создать класс виза карт и кредиток
             menu = "\t\t\tЛичный кабинет\n" + "1. Кошелек\n" + "2. Кредит\n" + "3. Аккаунт"
             print(menu)
             operation = int()

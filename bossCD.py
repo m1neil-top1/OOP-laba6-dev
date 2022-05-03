@@ -47,3 +47,5 @@ class BossCD(Bank_worker):
 
     def get_password(self):
         return self._password
+
+    # TODO: Написать окружение + прописать методы позволяющие менять зп работников.
