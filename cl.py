@@ -61,6 +61,7 @@ class Client(Person):
                         if operation < 1 or operation > 3:
                             print("Вы ошиблись повторите попытку!")
                     if operation == 1:
+                        # TODO: Даработать момент, что мы не можем посмотреть всю инфу пока не заполним данные! Или не выводить этот фракмент вовсе.
                         print("ФИО: " + self._name,
                               "\nВозраст: " + str(self._age),
                               "\nНомер паспорта: " + str(self._document),

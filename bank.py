@@ -100,35 +100,67 @@ class MyBank:
                 choose = int(input("Введите операцию: "))
                 if choose < 1 or choose > 3:
                     print("Не корректный в вод!")
-            # ? Проверить работоспособность.
             # Вход в аккаунт
             if choose == 1:
                 print("Вход в аккаунт")
                 correct = False
+                admin_accaunt = False
                 not_exit = "y"
                 index = int()
                 while correct == False and not_exit == "y":  # Вход в акк обычного пользователя
                     email = input("email: ")
-                    for i in range(0, len(self._list_clients)):
-                        if self._list_clients[i].get_email() == email:
-                            password = input("Введите пароль: ")
-                            if self._list_clients[i].get_password(
-                            ) == password:
-                                index = i
-                                correct = True
+                    for i in range(0, len(email)):
+                        if email[i] == "@":
+                            if email[i + 1:] == "admin.ua":
+                                admin_accaunt = True
                                 break
-                            else:
-                                print("Вы ввели не правильный пароль!")
-                                while not_exit != "y" and not_exit != "y":
-                                    not_exit = input("Хотите повторить? y/n:")
-                                    not_exit = not_exit.lower()
+                    if admin_accaunt == False:
+                        for i in range(0, len(self._list_clients)):
+                            if self._list_clients[i].get_email() == email:
+                                # TODO: Дописать цикл
+                                while not_exit == "y":
+                                    not_exit = str()
+                                    password = input("Введите пароль: ")
+                                    if self._list_clients[i].get_password(
+                                    ) == password:
+                                        index = i
+                                        correct = True
+                                        break
+                                    else:
+                                        print("Вы ввели не правильный пароль!")
+                                        while not_exit != "y" and not_exit != "n":
+                                            not_exit = input(
+                                                "Хотите повторить? y/n:")
+                                            not_exit = not_exit.lower()
+                                if not_exit == "n":
+                                    break
+                    elif admin_accaunt == True:
+                        if self._boss.get_email() == email:
+                            # TODO: Дописать цикл
+                            while not_exit == "y":
+                                not_exit = str()
+                                password = input("Введите пароль: ")
+                                if self._boss.get_password() == password:
+                                    correct = True
+                                    break
+                                else:
+                                    print("Вы ввели не правильный пароль!")
+                                    while not_exit != "y" and not_exit != "n":
+                                        not_exit = input(
+                                            "Хотите повторить? y/n:")
+                                        not_exit = not_exit.lower()
+                    if not_exit == "n":
+                        break
                     if correct == False:
                         print(
                             "Вы не правильно ввели свою почту. Повторите попытку!"
                         )
                         continue
-                if correct:
+                if correct and admin_accaunt != True:
                     self._user_area(self._list_clients[index])
+                elif correct and admin_accaunt == True:
+                    # TODO: Создаем окружение босса.
+                    a = 2
                 else:
                     continue
             # Регистрация аккаунта.
