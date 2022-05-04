@@ -1,12 +1,7 @@
 class Person:
-
-    def __init__(self,
-                 phone_numbe=str(),
-                 nama=None,
-                 document=None,
-                 work_place=None,
-                 work_position=None,
-                 salary=float()) -> None:
+    def __init__(
+        self, phone_numbe=str(), nama=None, document=None, work_place=None, work_position=None, salary=float()
+    ) -> None:
         self._phone_number = phone_numbe
         self._name = nama
         self._document = document
@@ -24,12 +19,5 @@ class Person:
 
 
 class Bank_worker(Person):
-
-    def __init__(self,
-                 phone_numbe="None",
-                 nama="None",
-                 document=str(),
-                 work_position="None",
-                 salary=float()) -> None:
-        super().__init__(phone_numbe, nama, document, "Alfa Bank",
-                         work_position, salary)
+    def __init__(self, phone_numbe="None", nama="None", document=str(), work_position="None", salary=float()) -> None:
+        super().__init__(phone_numbe, nama, document, "Alfa Bank", work_position, salary)

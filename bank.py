@@ -7,22 +7,25 @@ from lowyer import Lowyer
 
 
 class MyBank:
-
     def __init__(self) -> None:
         self._name = "MyBank"
         self._list_clients = [
-            Client("989830599", "Eric", 12345678, "Nix-solution",
-                   "junior-web-development", 15500, "eric@gmail.com", "1111",
-                   22),
-            Client("989830620", str(), None, None, None, 0,
-                   "ericalex0207@mail.ru", "1111", 0),
-            Client()
+            Client(
+                "989830599",
+                "Eric",
+                12345678,
+                "Nix-solution",
+                "junior-web-development",
+                15500,
+                "eric@gmail.com",
+                "1111",
+                22,
+            ),
+            Client("989830620", str(), None, None, None, 0, "ericalex0207@mail.ru", "1111", 0),
         ]
         # TODO: По формату сделать номер паспорта
-        self._manager = Manager("957459388", "Андрей Владимирович",
-                                "Паспорт: №345234545", 12500)
-        self._boss = BossCD("659863294", "Питер Квил", 93468216,
-                            "piterKvil@admin.ua", "2222")
+        self._manager = Manager("957459388", "Андрей Владимирович", "Паспорт: №345234545", 12500)
+        self._boss = BossCD("659863294", "Питер Квил", 93468216, "piterKvil@admin.ua", "2222")
         self._lowyer = Lowyer("986236599", "Александр Васильков", "98425642")
 
     # Manager`s office
@@ -33,10 +36,14 @@ class MyBank:
         summa = 0.0
         days = 0
         percent = 2
-        print("Минмальная сумма кредита - 600 грн.\n" +
-              "Максимальная сумма кредита - 15 000 грн.\n" +
-              "Кредитный процент составляет " + str(percent) + "% на день\n" +
-              "Срок платежа максимум 30 дней.")
+        print(
+            "Минмальная сумма кредита - 600 грн.\n"
+            + "Максимальная сумма кредита - 15 000 грн.\n"
+            + "Кредитный процент составляет "
+            + str(percent)
+            + "% на день\n"
+            + "Срок платежа максимум 30 дней."
+        )
         while summa < 600 or summa > 15000:
             summa = float(input("Выберите сумму: "))
             if summa < 600:
@@ -48,9 +55,7 @@ class MyBank:
             if days < 5:
                 print("Не корректный в вод.")
             elif days > 30:
-                print(
-                    "Мы не оформляем кредит со сроком платежа больше чем 30 дней."
-                )
+                print("Мы не оформляем кредит со сроком платежа больше чем 30 дней.")
         print("Итого:")
         print("Сумма кредита без учёта процентов: " + str(summa) + " грн.")
         print("Кредит выдается на: " + str(days), end=(" "))
@@ -60,7 +65,7 @@ class MyBank:
             print("дня.")
         elif days >= 5 and days <= 20 or days >= 25 and days <= 30:
             print("дней.")
-        print("Ежедневная процентная ставка: " + str(percent) + '%')
+        print("Ежедневная процентная ставка: " + str(percent) + "%")
         percent_one_day = (summa * 2) / 100
         print("Процент за 1 день: " + str(percent_one_day) + " грн.")
         print("Процент за " + str(days), end=(" "))
@@ -80,8 +85,7 @@ class MyBank:
             if user_answer.lower() != "y" and user_answer.lower() != "n":
                 print("Не корректный в вод!")
         if user_answer == "y":
-            self._boss.check_user(total_credit, days, summa_credit_on_days,
-                                  client)
+            self._boss.check_user(total_credit, days, summa_credit_on_days, client)
         elif user_answer == "n":
             print("Операция отменена!\n" + "Возвращаемся в кабинет...")
             time.sleep(2)
@@ -93,8 +97,7 @@ class MyBank:
     # Main function
     def main(self):
         while True:
-            print("1. Войти в аккаунт\n" + "2. Зарегистрироваться\n" +
-                  "3. Выйти")
+            print("1. Войти в аккаунт\n" + "2. Зарегистрироваться\n" + "3. Выйти")
             choose = int()
             while choose < 1 or choose > 3:
                 choose = int(input("Введите операцию: "))
@@ -111,32 +114,28 @@ class MyBank:
                     email = input("email: ")
                     for i in range(0, len(email)):
                         if email[i] == "@":
-                            if email[i + 1:] == "admin.ua":
+                            if email[i + 1 :] == "admin.ua":
                                 admin_accaunt = True
                                 break
                     if admin_accaunt == False:
                         for i in range(0, len(self._list_clients)):
                             if self._list_clients[i].get_email() == email:
-                                # TODO: Дописать цикл
                                 while not_exit == "y":
                                     not_exit = str()
                                     password = input("Введите пароль: ")
-                                    if self._list_clients[i].get_password(
-                                    ) == password:
+                                    if self._list_clients[i].get_password() == password:
                                         index = i
                                         correct = True
                                         break
                                     else:
                                         print("Вы ввели не правильный пароль!")
                                         while not_exit != "y" and not_exit != "n":
-                                            not_exit = input(
-                                                "Хотите повторить? y/n:")
+                                            not_exit = input("Хотите повторить? y/n:")
                                             not_exit = not_exit.lower()
                                 if not_exit == "n":
                                     break
                     elif admin_accaunt == True:
                         if self._boss.get_email() == email:
-                            # TODO: Дописать цикл
                             while not_exit == "y":
                                 not_exit = str()
                                 password = input("Введите пароль: ")
@@ -146,15 +145,12 @@ class MyBank:
                                 else:
                                     print("Вы ввели не правильный пароль!")
                                     while not_exit != "y" and not_exit != "n":
-                                        not_exit = input(
-                                            "Хотите повторить? y/n:")
+                                        not_exit = input("Хотите повторить? y/n:")
                                         not_exit = not_exit.lower()
                     if not_exit == "n":
                         break
                     if correct == False:
-                        print(
-                            "Вы не правильно ввели свою почту. Повторите попытку!"
-                        )
+                        print("Вы не правильно ввели свою почту. Повторите попытку!")
                         continue
                 if correct and admin_accaunt != True:
                     self._user_area(self._list_clients[index])
@@ -181,22 +177,20 @@ class MyBank:
             number_phone = input("Ваш номер телефона: +380 ")
             if len(number_phone) < 9:
                 print("Ошибка: Не корректный номер! Повторите попытку!")
-        client = Client(
-            number_phone)  # Сделать проверку нет ли такого уже номера
+        # TODO: Сделать проверку нет ли такого уже номера
+        client = Client(number_phone)
         correct_address = False
-        while correct_address == False:  # Проверку на зарегистрированую почту, потом.
+        while correct_address == False:  # TODO: Проверку на зарегистрированую почту, потом.
             email = input("Введите свой электронный адрес: ")
             for index in range(0, len(email)):
-                if (email[0] == "@"):
+                if email[0] == "@":
                     break
                 if email[index] == "@":
-                    if email[index +
-                             1:] == "gmail.com" or email[index +
-                                                         1:] == "mail.ru":
+                    if email[index + 1 :] == "gmail.com" or email[index + 1 :] == "mail.ru":
                         correct_address = True
                         break
             if correct_address == False:
-                print("Не корректный адрес электронной почты.")
+                print("Не корректный адрес электронной почты. Принимается только gmail.com или mail.ru")
         client.set_email(email)
         password = str()
         while len(password) < 4:
@@ -214,20 +208,20 @@ class MyBank:
         agree = str()
         while agree != "y" and agree != "n":
             agree = input("Продолжить? y/n: ")
-        if agree == 'y':
+        if agree == "y":
             self._list_clients.append(client)
             return True
-        elif agree == 'n':
+        elif agree == "n":
             del client
             return False
 
     # Функция связанная с клиентом
     def _user_area(self, user=Client):
         while True:
-            user_operation = user.personal_area(
-            )  # Попадаем в пользовательский кабинет.
+            # Попадаем в пользовательский кабинет.
+            user_operation = user.personal_area()
             if user_operation == 2:  # Вызываем кредитный отдел
-                self._credit_department(user)  #! Жду фикса бро аллё!!!!
+                self._credit_department(user)  # ! Жду фикса бро аллё!!!!
             elif user_operation == 3:
                 self._filling_user_data(user)
             elif user_operation == 4:
@@ -253,9 +247,7 @@ class MyBank:
                 elif client.get_can_get_credit() == False:
                     print("Вам отказанно в оформление кредита!")
             if choose == 2:
-                print(
-                    "Попадаем в метод Менеджера который позволяет оплатить кредит."
-                )
+                print("Попадаем в метод Менеджера который позволяет оплатить кредит.")
             if choose == 3:
                 print("Возвращаюсь в личный кабинет...")
                 time.sleep(2)
@@ -269,9 +261,7 @@ class MyBank:
                 age = int(input("Введите ваш возраст: "))
                 if age < 6 or age >= 65:
                     if age < 6:
-                        print(
-                            "Для оформления карты или кредита вам должно быть как минимум 6 лет!"
-                        )
+                        print("Для оформления карты или кредита вам должно быть как минимум 6 лет!")
                     elif age >= 65:
                         print("Мы не обслуживаем клиентов вашего возратса.")
                     print("Возврат в пользовательский кабинет....")
@@ -307,9 +297,7 @@ class MyBank:
                 if salary <= 0:
                     print("Введенные не корректные данныеж.")
                 elif salary < 6500:
-                    print(
-                        "Не корретные данные в Украине минимальная ставка 6500 грн."
-                    )
+                    print("Не корретные данные в Украине минимальная ставка 6500 грн.")
             client.set_salary(salary)
         print("Вы успешно заполнили данные! Подождите секунду...")
         time.sleep(1)

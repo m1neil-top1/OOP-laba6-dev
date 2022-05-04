@@ -4,20 +4,19 @@ import random
 
 
 class Client(Person):
-
     def __init__(
-            self,
-            phone_numbe=str(),  # Телефно
-            nama=str(),  # Имя фамилия
-            document=None,  # Номер документа
-            work_place=None,  # Место работы
-            work_position=None,  # Позиция на которой работает
-            salary=0.0,  # Зарплата
-            email=str(),
-            password=str(),
-            age=0) -> None:
-        super().__init__(phone_numbe, nama, document, work_place,
-                         work_position, salary)
+        self,
+        phone_numbe=str(),  # Телефно
+        nama=str(),  # Имя фамилия
+        document=None,  # Номер документа
+        work_place=None,  # Место работы
+        work_position=None,  # Позиция на которой работает
+        salary=0.0,  # Зарплата
+        email=str(),
+        password=str(),
+        age=0,
+    ) -> None:
+        super().__init__(phone_numbe, nama, document, work_place, work_position, salary)
         self._email = email  # Почта
         self._password = password  # Пароль
         self._rating = 10  # Придумать реализацию с рейтингом.
@@ -53,8 +52,7 @@ class Client(Person):
                     elif choose.lower == "n":
                         continue
                 while operation != 2:
-                    print("1. Информация об аккаунте\n" +
-                          "2. Вернуться в кабинет\n" + "3. Выйти из аккаунта")
+                    print("1. Информация об аккаунте\n" + "2. Вернуться в кабинет\n" + "3. Выйти из аккаунта")
                     operation = 0
                     while operation < 1 or operation > 3:
                         operation = int(input("Операция: "))
@@ -62,17 +60,18 @@ class Client(Person):
                             print("Вы ошиблись повторите попытку!")
                     if operation == 1:
                         # TODO: Даработать момент, что мы не можем посмотреть всю инфу пока не заполним данные! Или не выводить этот фракмент вовсе.
-                        print("ФИО: " + self._name,
-                              "\nВозраст: " + str(self._age),
-                              "\nНомер паспорта: " + str(self._document),
-                              "\nНомер телефона: +380 " + self._phone_number,
-                              "\nПочта: " + self._email,
-                              "\nМесто работы: " + self._work_place,
-                              "\nПозиция: " + self._work_position,
-                              "\nЗарплата: " + str(self._salary) + " грн.")
+                        print(
+                            "ФИО: " + self._name,
+                            "\nВозраст: " + str(self._age),
+                            "\nНомер паспорта: " + str(self._document),
+                            "\nНомер телефона: +380 " + self._phone_number,
+                            "\nПочта: " + self._email,
+                            "\nМесто работы: " + self._work_place,
+                            "\nПозиция: " + self._work_position,
+                            "\nЗарплата: " + str(self._salary) + " грн.",
+                        )
                         if self._has_credit:
-                            print("Сумма кредита: " + str(self._credit) +
-                                  " грн.")
+                            print("Сумма кредита: " + str(self._credit) + " грн.")
                         else:
                             print("Нет оформленного кредита")
                     elif operation == 2:
