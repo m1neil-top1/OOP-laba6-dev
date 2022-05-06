@@ -127,9 +127,6 @@ class Client(Person):
     def set_work_position(self, work_position):
         self._work_position = work_position
 
-    def set_salary(self, salary):
-        self._salary = salary
-
     def set_document(self, document):
         self._document = document
 
@@ -148,9 +145,6 @@ class Client(Person):
 
     def get_work_position(self):
         return self._work_position
-
-    def get_salary(self):
-        return self._salary
 
     def get_can_get_credit(self):
         return self._can_get_credit

@@ -1,3 +1,4 @@
+from ast import While
 from pydoc import cli
 from cl import Client
 from manager import Manager
@@ -228,6 +229,11 @@ class MyBank:
                 print("Выхожу из аккаунта пользователя...")
                 time.sleep(2)
                 break
+
+    # Функция связанная с Начальником
+    def _boss_office(self, boss=BossCD()):
+        while True:
+            print("Меню\n" + "1. Изменить зарплату работников\n" + "2. Выйти из аккаунта")
 
     def _credit_department(self, client=Client()):
         # TODO: Реализовать функцию: Оплатить кредит

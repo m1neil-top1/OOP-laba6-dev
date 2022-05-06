@@ -17,6 +17,12 @@ class Person:
     def set_name(self, name):
         self._name = name
 
+    def get_salary(self):
+        return self._salary
+
+    def set_salary(self, salary):
+        self._salary = salary
+
 
 class Bank_worker(Person):
     def __init__(self, phone_numbe="None", nama="None", document=str(), work_position="None", salary=float()) -> None:
