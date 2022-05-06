@@ -98,7 +98,7 @@ class MyBank:
     # Main function
     def main(self):
         while True:
-            print("1. Войти в аккаунт\n" + "2. Зарегистрироваться\n" + "3. Выйти")
+            print("\t\tГлавное меню\n" + "1. Войти в аккаунт\n" + "2. Зарегистрироваться\n" + "3. Выйти из программы")
             choose = int()
             while choose < 1 or choose > 3:
                 choose = int(input("Введите операцию: "))
@@ -156,8 +156,7 @@ class MyBank:
                 if correct and admin_accaunt != True:
                     self._user_area(self._list_clients[index])
                 elif correct and admin_accaunt == True:
-                    # TODO: Создаем окружение босса.
-                    a = 2
+                    self._boss_office(self._boss)
                 else:
                     continue
             # Регистрация аккаунта.
@@ -233,7 +232,30 @@ class MyBank:
     # Функция связанная с Начальником
     def _boss_office(self, boss=BossCD()):
         while True:
-            print("Меню\n" + "1. Изменить зарплату работников\n" + "2. Выйти из аккаунта")
+            print("\tЛичный кабинет\n" + "1. Изменить зарплату работников\n" + "2. Выйти из аккаунта")
+            user_input = 0
+            while user_input < 1 or user_input > 2:
+                user_input = int(input("Операция: "))
+                if user_input < 1 or user_input > 2:
+                    print("Не корректный в вод! Повторите попытку!")
+            if user_input == 1:
+                while True:
+                    print("1. Менеджер\n" + "2. Юрист консультант\n" + "3. Вернутся в меню")
+                    boss_choice = 0
+                    while boss_choice < 1 or boss_choice > 3:
+                        boss_choice = int(input("Выберите номер работника: "))
+                        if boss_choice < 1 or boss_choice > 3:
+                            print("Не корректный в вод! Повторите попытку!")
+                    if boss_choice == 1:
+                        boss.change_salary_worker(self._manager)
+                    elif boss_choice == 2:
+                        boss.change_salary_worker(self._lowyer)
+                    elif boss_choice == 3:
+                        break
+            elif user_input == 2:
+                print("Выхожу из аккаунта. Подождите!")
+                time.sleep(2)
+                break
 
     def _credit_department(self, client=Client()):
         # TODO: Реализовать функцию: Оплатить кредит
@@ -301,7 +323,7 @@ class MyBank:
             while salary < 6500:
                 salary = float(input("Введите вашу зарплату: "))
                 if salary <= 0:
-                    print("Введенные не корректные данныеж.")
+                    print("Введенные не корректные данные.")
                 elif salary < 6500:
                     print("Не корретные данные в Украине минимальная ставка 6500 грн.")
             client.set_salary(salary)

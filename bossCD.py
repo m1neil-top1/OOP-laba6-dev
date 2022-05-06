@@ -40,4 +40,18 @@ class BossCD(Bank_worker):
     def get_password(self):
         return self._password
 
-    # TODO: Написать окружение + прописать методы позволяющие менять зп работников.
+    def change_salary_worker(self, worker=Bank_worker()):
+        print("Информация об работнике:")
+        worker.info()
+        new_salary = 0
+        while new_salary < 6500:
+            new_salary = float(input("Введите новую зарплату: "))
+            if new_salary <= 0:
+                print("Введенные не корректные данные.")
+            elif new_salary < 6500:
+                print("Не корретные данные в Украине минимальная ставка 6500 грн.")
+        worker.set_salary(new_salary)
+        print("\nВывожу обновленую информацию об работнике:")
+        worker.info()
+        print("Возвращаюсь в меню..")
+        time.sleep(2)

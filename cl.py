@@ -121,30 +121,12 @@ class Client(Person):
     def get_rating(self):
         return self._rating
 
-    def set_work_place(self, work_place):
-        self._work_place = work_place
-
-    def set_work_position(self, work_position):
-        self._work_position = work_position
-
-    def set_document(self, document):
-        self._document = document
-
     def get_email(self):
         return self._email
 
     # Данные необходимы Менеджеру
     def get_has_credit(self):
         return self._has_credit
-
-    def get_document(self):
-        return self._document
-
-    def get_work_place(self):
-        return self._work_place
-
-    def get_work_position(self):
-        return self._work_position
 
     def get_can_get_credit(self):
         return self._can_get_credit
