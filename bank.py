@@ -5,7 +5,7 @@ from manager import Manager
 import time
 from bossCD import BossCD
 from lowyer import Lowyer
-
+from card import *
 
 class MyBank:
     def __init__(self) -> None:
@@ -28,7 +28,7 @@ class MyBank:
         self._manager = Manager("957459388", "Андрей Владимирович", "Паспорт: №345234545", 12500)
         self._boss = BossCD("659863294", "Питер Квил", 93468216, "piterKvil@admin.ua", "2222")
         self._lowyer = Lowyer("986236599", "Александр Васильков", "98425642")
-
+        self._card = Bank_card(100000, 0)
     # Manager`s office
     def _manager_office(self, client=Client()):
         examination = self._manager.check_client_for_get_credit(client)
@@ -257,6 +257,47 @@ class MyBank:
                 time.sleep(2)
                 break
 
+    def pay_credit(self, client=Client()):
+        if client.get_has_credit() == True:
+            print(
+                "Вам нужно оплатить кредит в сумме: " + str(client.get_credit() + client.get_sum_use_credit()) + " грн.",
+                "\n1. Оплатить\n" + "2. Отмена",
+            )
+            user_input = 0
+            while user_input < 1 or user_input > 2:
+                user_input = int(input("Выберите операцию: "))
+                if user_input < 1 or user_input > 2:
+                    print("Не корректный в вод!")
+            while True:
+                print("Выберите счёт")
+                exit = 0
+                for i in range(0, len(client.get_cards())):
+                    print(
+                        str(i + 1) + ") Номер счёта: " + str(client.get_cards()[i].get_number()),
+                        ", сумма счёта: " + str(client.get_cards()[i].get_money()) + " грн.",
+                    )
+                    # Для отмены операции
+                    if i == len(client.get_cards()) - 1:
+                        exit = i + 2
+                        print(str(exit) + ") Выход")
+                number_card = 0
+                while number_card < 1 or number_card > exit:
+                    number_card = int(input("Выберите картку: "))
+                if number_card == exit:
+                    break
+                else:    
+                    if client.get_credit() + client.get_sum_use_credit()  > client.get_cards()[number_card-1].get_money():
+                        print("На счету не достаточно средств!")
+                    else:
+                        client.get_cards()[number_card-1].withdrawals(client.get_credit()+client.get_sum_use_credit())
+                        self._card.replenishment_funds(client.get_credit()+client.get_sum_use_credit())
+                        client.set_credit(0)
+                        client.set_sum_use_credit(0)
+                        client.set_has_credit(False)
+                        client.set_credit_time(0)                
+        else:
+            print("У вас нету оформленого кредита!")
+
     def _credit_department(self, client=Client()):
         # TODO: Реализовать функцию: Оплатить кредит
         while True:
@@ -275,7 +316,7 @@ class MyBank:
                 elif client.get_can_get_credit() == False:
                     print("Вам отказанно в оформление кредита!")
             if choose == 2:
-                print("Попадаем в метод Менеджера который позволяет оплатить кредит.")
+                self.pay_credit(client)
             if choose == 3:
                 print("Возвращаюсь в личный кабинет...")
                 time.sleep(2)

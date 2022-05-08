@@ -137,7 +137,7 @@ class Client(Person):
                                 user_input1 = int(input("Операция: "))
                                 if user_input1 < 1 or user_input1 > 2:
                                     print("Не корректный в вод!")
-                            summa = 0
+                            summa = -1
                             while summa < 0:
                                 summa = float(input("Введите сумму: "))
                                 if summa <= 0:

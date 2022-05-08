@@ -16,8 +16,16 @@ class Card:
             self._money -= summa
             print("С вашего счёта было снято: " + str(summa) + " грн.")
             print("На вашем счёте осталось: " + str(self._money) + " грн.")
-            
-    def replenishment_funds(self, summa): # Пополнить деньги
+
+    def replenishment_funds(self, summa):  # Пополнить деньги
         self._money += summa
         print("Ваш счёта был пополнен на: " + str(summa) + " грн.")
         print("На вашем счёте теперь: " + str(self._money) + " грн.")
+
+
+class Bank_card(Card):
+    def __init__(self, money, number):
+        super().__init__(money, number)
+
+    def replenishment_funds(self, summa):  # Пополнить деньги
+        self._money += summa
