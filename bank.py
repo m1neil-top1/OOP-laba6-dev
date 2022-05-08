@@ -43,7 +43,7 @@ class MyBank:
             + "Кредитный процент составляет "
             + str(percent)
             + "% на день\n"
-            + "Срок платежа максимум 30 дней."
+            + "Срок платежа от 5 и не более 30 дней."
         )
         while summa < 600 or summa > 15000:
             summa = float(input("Выберите сумму: "))
@@ -221,7 +221,7 @@ class MyBank:
             # Попадаем в пользовательский кабинет.
             user_operation = user.personal_area()
             if user_operation == 2:  # Вызываем кредитный отдел
-                self._credit_department(user)  # ! Жду фикса бро аллё!!!!
+                self._credit_department(user)
             elif user_operation == 3:
                 self._filling_user_data(user)
             elif user_operation == 4:

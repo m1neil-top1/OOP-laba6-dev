@@ -39,7 +39,10 @@ class Lowyer(Bank_worker):
             if user_signature.lower() != "y" and user_signature.lower() != "n":
                 print("Не корректынй ответ! Повторите попытку!")
         if user_signature.lower() == "y":
-            print("С настоящего момента договор вступает в силу!\n", "Поздравляем вы успешно оформили кредит!")
+            print(
+                "С настоящего момента договор вступает в силу!\n",
+                "Поздравляем вы успешно оформили кредит!",
+            )
             client.set_has_credit(True)
             client.set_can_get_credit(False)
         elif user_signature == "n":
@@ -62,6 +65,9 @@ class Lowyer(Bank_worker):
                 print("Тогда мы его оформляем!!!!!")
                 client.set_has_credit(True)
                 client.set_can_get_credit(False)
-                print("Поздравляем с успешным оформлением кредита!\n", "Возвращаюсь в меню....")
+                print(
+                    "Поздравляем с успешным оформлением кредита!\n",
+                    "Возвращаюсь в меню....",
+                )
                 time.sleep(2)
                 return
