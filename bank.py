@@ -82,7 +82,7 @@ class MyBank:
         print("Итого к оплате кредита: " + str(total_credit) + " гнр.")
         user_answer = ""
         while user_answer != "y" and user_answer != "n":
-            user_answer = input("Продолжим офрмлять кредить? y/n: ")
+            user_answer = input("Продолжим оформлять кредить? y/n: ")
             if user_answer.lower() != "y" and user_answer.lower() != "n":
                 print("Не корректный в вод!")
         if user_answer == "y":

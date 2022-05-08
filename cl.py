@@ -1,3 +1,4 @@
+from http import client
 from person import Person
 from card import Card
 import time
@@ -106,9 +107,12 @@ class Client(Person):
                     if user_input < 1 or user_input > 3:
                         print("Не корректный в вод!")
                 if user_input == 1:
-                    while True:
-                        # TODO: Сделать октрытие счета
-                        print("Сделай открытие новых счетов карл алллёёёёёё спасииии")
+                    if len(self._cards) < 3:
+                        Client.static_var_count_card += 1
+                        self._cards.append(Card(0, Client.static_var_count_card))
+                        print("Номер счёта успешно открыт!")
+                    else:
+                        print("В нашем банке можно открыть максимум 3 счёта!")     
                 elif user_input == 2:
                     while True:
                         print("Количество счетов:", len(self._cards))
@@ -134,7 +138,7 @@ class Client(Person):
                                 if user_input1 < 1 or user_input1 > 2:
                                     print("Не корректный в вод!")
                             summa = 0
-                            while summa <= 0:
+                            while summa < 0:
                                 summa = float(input("Введите сумму: "))
                                 if summa <= 0:
                                     print("Не корректный в вод!")
@@ -146,6 +150,10 @@ class Client(Person):
                     print("Возвращаюсь в кабинет...")
                     time.sleep(2)
                     return
+
+
+    def get_cards(self):
+        return self._cards
 
     def set_email(self, email):
         self._email = email

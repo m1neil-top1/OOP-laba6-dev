@@ -17,7 +17,7 @@ class Card:
             print("С вашего счёта было снято: " + str(summa) + " грн.")
             print("На вашем счёте осталось: " + str(self._money) + " грн.")
             
-    def replenishment_funds(self, summa): # Поплнить деньги
+    def replenishment_funds(self, summa): # Пополнить деньги
         self._money += summa
         print("Ваш счёта был пополнен на: " + str(summa) + " грн.")
         print("На вашем счёте теперь: " + str(self._money) + " грн.")

@@ -1,5 +1,6 @@
 from person import Bank_worker
 from cl import Client
+from card import Card
 import shape_day
 import time
 
@@ -39,6 +40,7 @@ class Lowyer(Bank_worker):
             if user_signature.lower() != "y" and user_signature.lower() != "n":
                 print("Не корректынй ответ! Повторите попытку!")
         if user_signature.lower() == "y":
+            self.money_transfer(client)
             print(
                 "С настоящего момента договор вступает в силу!\n",
                 "Поздравляем вы успешно оформили кредит!",
@@ -65,9 +67,28 @@ class Lowyer(Bank_worker):
                 print("Тогда мы его оформляем!!!!!")
                 client.set_has_credit(True)
                 client.set_can_get_credit(False)
+                self.money_transfer(client)
                 print(
                     "Поздравляем с успешным оформлением кредита!\n",
                     "Возвращаюсь в меню....",
                 )
                 time.sleep(2)
                 return
+            
+    def money_transfer(self, client = Client()):
+        if len(client.get_cards()) == 0:
+            print("У вас нету счетов мы откроем счёт для перевода на него кредита!")
+            Client.static_var_count_card += 1
+            client.get_cards().append(Card(client.get_credit(), Client.static_var_count_card))
+            print("Деньги успешно попали на счёт проверти свою карту в своем кошельке.")
+        else:
+            for i in range(0, len(self._cards)):
+                print(
+                    str(i + 1) + ") Номер счёта: " + str(self._cards[i].get_number()),
+                    "сумма счёта: " + str(self._cards[i].get_money()) + " грн.",
+                )   
+            number_card = 0
+            while number_card < 1 or number_card > exit:
+                number_card = int(input("Выберите картку: "))
+            client.get_cards[number_card-1].replenishment_funds(client.get_credit)
+            print("Деньги успешно попали на счёт проверти свою карту в своем кошельке.")
